@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressHandle" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PhotoEditorController">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <DialogPane fx:id="DiaPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="293.0" GridPane.rowIndex="2">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="TF_Width" GridPane.columnIndex="1" />
+                        <TextField fx:id="TF_Height" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Width" />
+                        <Label text="Height" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </content>
+            </DialogPane>
+            <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <items>
+                  <MenuButton mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#New_newpaint" text="New" />
+                        <MenuItem mnemonicParsing="false" onAction="#Open_readImg" text="Open" />
+                        <MenuItem mnemonicParsing="false" onAction="#Open_readProject" text="Open Project" />
+                        <MenuItem mnemonicParsing="false" onAction="#SaveAs_project" text="Save as Project" />
+                        <MenuItem mnemonicParsing="false" onAction="#SaveAs_save" text="Save as image" />
+                     </items>
+                  </MenuButton>
+                  <Button mnemonicParsing="false" onAction="#doPreStep" text="undo">
+                     <tooltip>
+                        <Tooltip text="Ctrl+Z" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#backToMenu" text="Back to Menu" />
+               </items>
+            </ToolBar>
+            <StackPane fx:id="toolStackPane" GridPane.rowIndex="1">
+               <children>
+                  <ToolBar fx:id="textToolBar" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <ComboBox fx:id="fontBox" prefHeight="23.0" prefWidth="234.0" />
+                        <ComboBox fx:id="fontSizeBox" editable="true" prefHeight="23.0" prefWidth="70.0" />
+                        <RadioButton fx:id="boldRadioButton" mnemonicParsing="false" onAction="#boldRadioSelected" prefHeight="16.0" prefWidth="55.0" text="Bold" />
+                        <RadioButton fx:id="italicRadioButton" mnemonicParsing="false" onAction="#italicRadioSelected" text="Italic" />
+                        <Button mnemonicParsing="false" onAction="#backToMenu" prefHeight="23.0" prefWidth="50.0" text="OK" />
+                     </items>
+                  </ToolBar>
+                  <ToolBar fx:id="toolBar" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Button mnemonicParsing="false" onAction="#LeftAndRightButtonPressed" text="Mirror flip" />
+                        <Button mnemonicParsing="false" onAction="#rotateButtonPressed" text="rotate" />
+                        <Label text="Height:" />
+                        <TextField fx:id="height_text" prefHeight="23.0" prefWidth="100.0" promptText="300" />
+                        <Label text="Width:" />
+                        <TextField fx:id="width_text" prefWidth="100.0" promptText="300" />
+                        <Button fx:id="changeSizeButton" mnemonicParsing="false" onAction="#changeSizeButtonPressed" prefHeight="23.0" prefWidth="50.0" text="OK" />
+                        <Button fx:id="selectButton" mnemonicParsing="false" onAction="#selectButtonPressed" prefWidth="50.0" text="select" />
+                        <Button fx:id="cutButton" mnemonicParsing="false" onAction="#cutButtonPressed" prefWidth="50.0" text="cut" />
+                        <Button mnemonicParsing="false" onAction="#NewText" prefWidth="50.0" text="T" />
+                     </items>
+                  </ToolBar>
+               </children>
+            </StackPane>
+            <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="528.0" prefWidth="599.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
+              <tabs>
+                <Tab text="WorkPlace">
+                  <content>
+                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="812.0" prefWidth="828.0">
+                           <children>
+                              <SplitPane dividerPositions="0.7976588628762541" layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="812.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                    <StackPane>
+                                       <children>
+                                          <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="820.0" prefWidth="654.0" style="-fx-background-color: LIGHTGREY;">
+                                             <center>
+                                                <Pane fx:id="BackgroundPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-image: url('transparent.jpg');" visible="false" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <StackPane fx:id="stackPane" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#StackPaneClickHandler" onMouseDragged="#StackPaneDragHandler" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: TRANSPARENT;" />
+                                                   </children>
+                                                </Pane>
+                                             </center>
+                                          </BorderPane>
+                                          <Pane fx:id="textPane" onMouseClicked="#StackPaneClickHandler" onMouseDragged="#StackPaneDragHandler" prefHeight="200.0" prefWidth="200.0" visible="false">
+                                             <children>
+                                                <TextField fx:id="typeInField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </StackPane>
+                                    <AnchorPane maxWidth="-Infinity" minWidth="0.0" prefHeight="813.0" prefWidth="158.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5424063116370809" orientation="VERTICAL" prefHeight="810.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="156.0">
+                                                   <children>
+                                                      <TabPane prefHeight="286.0" prefWidth="161.0" tabClosingPolicy="UNAVAILABLE">
+                                                         <tabs>
+                                                            <Tab text="Style1">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="257.0" prefWidth="137.0">
+                                                                     <children>
+                                                                        <GridPane hgap="5.0" prefHeight="257.0" prefWidth="161.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                           <columnConstraints>
+                                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.66664250691733" minWidth="10.0" prefWidth="44.66665013631185" />
+                                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.33335367838542" minWidth="10.0" prefWidth="104.00001653035481" />
+                                                                           </columnConstraints>
+                                                                           <rowConstraints>
+                                                                              <RowConstraints maxHeight="76.33332824707031" minHeight="10.0" prefHeight="47.99999809265137" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="76.33332824707031" minHeight="5.3333352406819685" prefHeight="32.999996185302734" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="89.66666412353517" minHeight="10.0" prefHeight="33.00000762939453" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="90.33331553141275" minHeight="10.0" prefHeight="34.000027974446596" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="131.66666793823242" minHeight="8.333333333333343" prefHeight="33.333343505859375" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="131.66666793823242" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="131.66666793823242" minHeight="10.0" prefHeight="48.00000000000003" vgrow="SOMETIMES" />
+                                                                           </rowConstraints>
+                                                                           <children>
+                                                                              <Label text="retro" GridPane.rowIndex="2" />
+                                                                              <Slider fx:id="graySlider" blockIncrement="0.1" max="1.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                              <Slider fx:id="OpacitySlider" blockIncrement="1.0" value="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                              <Label prefHeight="15.0" prefWidth="62.0" text="Opacity" GridPane.rowIndex="3" />
+                                                                              <Label text="bright" GridPane.rowIndex="4" />
+                                                                              <Slider fx:id="brightSlider" blockIncrement="1.0" max="50.0" min="-50.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                              <Label text="Hue" GridPane.rowIndex="1" />
+                                                                              <Label text="Saturation" />
+                                                                              <Slider fx:id="HueSlider" blockIncrement="1.0" max="50.0" min="-50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                              <Slider fx:id="SaturationSlider" blockIncrement="5.0" max="50.0" min="-50.0" GridPane.columnIndex="1" />
+                                                                              <Button fx:id="transparentButton" mnemonicParsing="false" onAction="#transparentButtonPressed" text="去背" GridPane.rowIndex="5" />
+                                                                              <Label text="Reflection" GridPane.rowIndex="6" />
+                                                                              <Slider fx:id="reflectSlider" blockIncrement="0.1" max="1.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                              <Button mnemonicParsing="false" onAction="#transparentpenButtonPressed" text="erase" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                                           </padding>
+                                                                        </GridPane>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                            <Tab text="draw">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="174.0">
+                                                                     <children>
+                                                                        <GridPane layoutX="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="257.0" prefWidth="161.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                           <columnConstraints>
+                                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.66666666666667" minWidth="10.0" prefWidth="52.666629791259766" />
+                                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.00003687540692" minWidth="10.0" prefWidth="104.00003687540692" />
+                                                                           </columnConstraints>
+                                                                           <rowConstraints>
+                                                                              <RowConstraints maxHeight="42.333343505859375" minHeight="10.0" prefHeight="12.666666666666668" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="46.66665649414062" minHeight="10.0" prefHeight="33.333323160807296" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="43.333343505859375" minHeight="10.0" prefHeight="43.333343505859375" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="43.333343505859375" minHeight="10.0" prefHeight="43.333343505859375" vgrow="SOMETIMES" />
+                                                                              <RowConstraints maxHeight="43.333343505859375" minHeight="10.0" prefHeight="43.333343505859375" vgrow="SOMETIMES" />
+                                                                           </rowConstraints>
+                                                                           <children>
+                                                                              <Slider fx:id="pensizeSlider" blockIncrement="1.0" max="5.0" min="1.0" value="4.0" GridPane.columnIndex="1" />
+                                                                              <ColorPicker fx:id="colorpicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                              <Label text="pensize" />
+                                                                              <Label text="pencolor" GridPane.rowIndex="1" />
+                                                                           </children>
+                                                                        </GridPane>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                         </tabs>
+                                                      </TabPane>
+                                                   </children></AnchorPane>
+                                                <GridPane minHeight="50.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <ScrollPane prefHeight="239.0" prefWidth="156.0" vbarPolicy="ALWAYS">
+                                                         <content>
+                                                            <VBox fx:id="Layer_Vbox" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="200.0" />
+                                                         </content>
+                                                      </ScrollPane>
+                                                      <StackPane GridPane.rowIndex="1">
+                                                         <children>
+                                                            <GridPane prefHeight="20.0" prefWidth="144.0">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="57.0" minWidth="10.0" prefWidth="46.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="8.0" prefWidth="56.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="53.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Button fx:id="newLayerButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newlayer" text="new" />
+                                                                  <Button fx:id="visibleLayerButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#LayerVisible" prefHeight="23.0" prefWidth="57.0" text="visible" GridPane.columnIndex="1" />
+                                                                  <Button fx:id="deleteLayerButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#LayerDelete" prefHeight="23.0" prefWidth="55.0" text="Delete" GridPane.columnIndex="2" />
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </GridPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>
